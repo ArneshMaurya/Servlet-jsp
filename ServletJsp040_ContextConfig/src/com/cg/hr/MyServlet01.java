@@ -1,0 +1,40 @@
+package com.cg.hr;
+
+import java.io.IOException;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContainerInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/*
+ * The context parameter are accessible to all web components in an application,
+ * servlet,JSP,Filters,Listeners
+ * Declare common values like company name,URLs of other applications
+ * 
+ * The config parameters, 
+ * Get them from ServletConfig (One object per servlet/jsp)
+ * Accessible to only a parent web component.
+ * Not accessible to any other web component.
+ */
+//@WebServlet("/MyServlet01")
+public class MyServlet01 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ServletContext ctx=getServletContext();
+		String companyName=ctx.getInitParameter("companyName");
+		System.out.println(companyName);
+		
+		ServletConfig config=super.getServletConfig();
+		String pageTitle=config.getInitParameter("pageTitle");
+		System.out.println(pageTitle);
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+}
